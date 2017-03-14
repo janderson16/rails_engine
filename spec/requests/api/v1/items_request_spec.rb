@@ -14,7 +14,7 @@ describe "Items API " do
   end
 
   it "can get one item by its id" do
-    id = create(:item).id
+    id = create(:item)
 
     get "/api/v1/items/#{id}"
 
@@ -35,7 +35,7 @@ describe "Items API " do
     expect(item["name"]).to eq(name)
   end
 
-  it "can find an item by created date" do
+  it "can find an item by updated date" do
     updated = create(:item).formatted_update
     get "/api/v1/items/find?updated_at=#{updated}"
 

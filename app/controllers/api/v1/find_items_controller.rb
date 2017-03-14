@@ -1,7 +1,7 @@
 class Api::V1::FindItemsController < ApplicationController
 
   def show
-    render json: Item.find_by(params[:find_item_params])
+    render json: Item.find_by(params[:find_items_params])
   end
 
   def index

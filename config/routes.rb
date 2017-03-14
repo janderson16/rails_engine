@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       resources :items, only:[:show, :index]
       resources :find_items, only: [:show, :index]
       resources :random_items, only: [:show]
+      resources :find_merchants, only: [:show, :index]
+      resources :random_merchants, only: [:show]
+      resources :merchants, only: [:show, :index]
     end
   end
 end
