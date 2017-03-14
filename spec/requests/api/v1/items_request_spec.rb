@@ -36,13 +36,13 @@ describe "Items API " do
   end
 
   it "can find an item by created date" do
-    created = create(:item).formatted_create
-    get "/api/v1/items/find?created_at=#{created}"
+    updated = create(:item).formatted_update
+    get "/api/v1/items/find?updated_at=#{updated}"
 
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(item["created_at"]).to eq(created)
+    expect(item["updated_at"]).to eq(updated)
   end
 
 end

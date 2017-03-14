@@ -6,6 +6,6 @@ class Item < ApplicationRecord
   end
 
   def formatted_update
-
+    updated_at.iso8601(3)
   end
 end
