@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -10,8 +11,9 @@ merchant = File.read(merchant_file)
 merchant_cells = CSV.parse(merchant, headers: true)
 merchant_cells.each do |row|
   Merchant.create!(
-      name:       name,
-      created_at: created_at,
-      updated_at: updated_at
+      id:         row[:id],
+      name:       row[:name],
+      created_at: row[:created_at],
+      updated_at: row[:updated_at]
                   )
   end
