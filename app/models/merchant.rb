@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :invoices
 
   def formatted_create
     created_at.iso8601(3)
