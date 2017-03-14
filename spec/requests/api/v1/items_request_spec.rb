@@ -23,4 +23,26 @@ describe "Items API " do
     expect(response).to be_success
     expect(item["id"]).to eq(id)
   end
+
+  it "can find an item by name" do
+    name = create(:item).name
+
+    get "/api/v1/items/find?name=#{name}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["name"]).to eq(name)
+  end
+
+  it "can find an item by created date" do
+    created = create(:item).formatted_create
+    get "/api/v1/items/find?created_at=#{created}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["created_at"]).to eq(created)
+  end
+
 end
