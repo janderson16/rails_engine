@@ -21,7 +21,17 @@ describe "Invoice API" do
     expect(invoice["id"]).to eq(id)
   end
 
-  it
+  it "can find multiple invoices" do
+    invoices = create_list(:invoice, 3)
+
+    get "/api/v1/invoices/find_all?id=#{invoices[0].id}"
+
+    expect(response).to be_success
+
+    invoices_response = JSON.parse(response.body)
+
+    expect(invoices_response.first["id"]).to eq(invoices[0].id)
+  end
 
 
 end
