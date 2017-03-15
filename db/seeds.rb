@@ -18,4 +18,10 @@ Merchant.destroy_all
 Item.destroy_all
   CSV.foreach("./data/items.csv", :headers => true) do |row|
   Item.create!(row.to_hash)
-  end
+end
+
+Invoice.destroy_all
+  CSV.foreach("./data/invoices.csv", :headers => true) do |row|
+  Invoice.create!(row.to_hash)
+end
+

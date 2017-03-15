@@ -66,7 +66,6 @@ describe "Items API " do
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    byebug
     expect(item["created_at"]).to eq("2012-03-17T03:04:05.000Z")
   end
 
