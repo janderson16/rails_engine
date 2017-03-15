@@ -19,3 +19,13 @@ Transaction.destroy_all
 CSV.foreach("./data/transactions.csv", :headers => true) do |row|
   Transaction.create!(row.to_hash)
 end
+
+Item.destroy_all
+CSV.foreach("./data/items.csv", :headers => true) do |row|
+  Item.create!(row.to_hash)
+end
+
+InvoiceItem.destroy_all
+CSV.foreach("./data/invoice_items.csv", :headers => true) do |row|
+  InvoiceItem.create!(row.to_hash)
+end

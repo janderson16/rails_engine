@@ -69,29 +69,29 @@ describe "Transactions API " do
     expect(transactions[1]["credit_card_number"]).to eq("4654405418249632")
   end
 
-  # it "can find all transactions by created date" do
-  #   transaction_1 = Transaction.create(created_at: "2012-03-17T03:04:05.000Z")
-  #   transaction_2 = Transaction.create(created_at: "2012-03-17T03:04:05.000Z")
-  #   transaction_3 = Transaction.create(created_at: "2012-03-17T03:04:06.000Z")
-  #
-  #   get "/api/v1/transactions/find_all?created_at=#{transaction_1.created_at}"
-  #
-  #   transactions = JSON.parse(response.body)
-  #
-  #   expect(response).to be_success
-  #   expect(transactions[1]["created_at"]).to eq("2012-03-17T03:04:05.000Z")
-  # end
+  it "can find all transactions by created date" do
+    transaction_1 = Transaction.create(created_at: "2012-03-17T03:04:05.000Z")
+    transaction_2 = Transaction.create(created_at: "2012-03-17T03:04:05.000Z")
+    transaction_3 = Transaction.create(created_at: "2012-03-17T03:04:06.000Z")
 
-  # it "can find all transactions by updated date" do
-  #   transaction_1 = Transaction.create(updated_at: "2012-03-17T03:04:05.000Z")
-  #   transaction_2 = Transaction.create(updated_at: "2012-03-17T03:04:05.000Z")
-  #   transaction_3 = Transaction.create(updated_at: "2012-03-17T03:04:06.000Z")
-  #   get "/api/v1/transactions/find_all?updated_at=#{transaction_1.updated_at}"
-  #
-  #   transactions = JSON.parse(response.body)
-  #
-  #
-  #   expect(response).to be_success
-  #   expect(transactions[1]["updated_at"]).to eq("2012-03-17T03:04:05.000Z")
-  # end
+    get "/api/v1/transactions/find_all?created_at=#{transaction_1.created_at}"
+
+    transactions = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(transactions[1]["credit_card_number"]).to eq(transaction_1.credit_card_number)
+  end
+
+  it "can find all transactions by updated date" do
+    transaction_1 = Transaction.create(updated_at: "2012-03-17T03:04:05.000Z")
+    transaction_2 = Transaction.create(updated_at: "2012-03-17T03:04:05.000Z")
+    transaction_3 = Transaction.create(updated_at: "2012-03-17T03:04:06.000Z")
+    get "/api/v1/transactions/find_all?updated_at=#{transaction_1.updated_at}"
+
+    transactions = JSON.parse(response.body)
+
+
+    expect(response).to be_success
+    expect(transactions[1]["credit_card_number"]).to eq(transaction_1.credit_card_number)
+  end
 end
