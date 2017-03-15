@@ -11,6 +11,11 @@ require 'csv'
 #                   )
 #   end
 Merchant.destroy_all
-CSV.foreach("./data/merchants.csv", :headers => true) do |row|
+  CSV.foreach("./data/merchants.csv", :headers => true) do |row|
   Merchant.create!(row.to_hash)
-end
+  end
+
+Item.destroy_all
+  CSV.foreach("./data/items.csv", :headers => true) do |row|
+  Item.create!(row.to_hash)
+  end
