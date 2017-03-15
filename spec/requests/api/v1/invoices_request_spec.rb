@@ -27,11 +27,8 @@ describe "Invoice API" do
     get "/api/v1/invoices/find_all?id=#{invoices[0].id}"
 
     expect(response).to be_success
-
     invoices_response = JSON.parse(response.body)
-
     expect(invoices_response.first["id"]).to eq(invoices[0].id)
   end
-
 
 end
