@@ -12,4 +12,10 @@ class Merchant < ApplicationRecord
     .limit(count)
   end
 
+  def favorite_customer
+    customers.joins(:transactions)
+    .merge(Transaction.success)
+    .group(:id).order('count(transactions) DESC')
+  end
+
 end
