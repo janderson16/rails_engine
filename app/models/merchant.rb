@@ -5,8 +5,19 @@ class Merchant < ApplicationRecord
   has_many :invoice_items, through: :invoices
   has_many :customers, through: :invoices
 
+  # def revenue
+  #   byebug
+  # end
+
+  def self.most_items(count)
+    joins(invoices: [:transactions, :invoice_items])
+    .where(transactions: {result: "success"})
+    .group(:id).order("sum(quantity) DESC")
+    .limit(count)
+  end
+
   def self.most_revenue(count)
-    joins(:transactions, :invoice_items)
+    joins(invoices: [:transactions, :invoice_items])
     .where(transactions: {result: "success"})
     .group(:id).order("sum(quantity * unit_price) DESC")
     .limit(count)
