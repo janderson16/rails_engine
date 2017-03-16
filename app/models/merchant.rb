@@ -15,7 +15,7 @@ class Merchant < ApplicationRecord
   def favorite_customer
     customers.joins(:transactions)
     .merge(Transaction.success)
-    .group(:id).order('count(transactions) DESC')
+    .group(:id).order('count(transactions) DESC').first
   end
 
 end
