@@ -7,22 +7,21 @@ describe "Items API " do
     get '/api/v1/items'
 
     expect(response).to be_success
-
     items = JSON.parse(response.body)
 
     expect(items.count).to eq(3)
   end
 
   it "loads an individual item" do
-    item1 = Item.create!(id: 1492, name: "item1", description: "Good item", unit_price: 22500)
+    Item.create!(id: 1492, name: "item1", description: "Good item", unit_price: 225000)
 
     get "/api/v1/items/#{1492}"
 
     expect(response).to be_success
 
-    items = JSON.parse(response.body)
+    item = JSON.parse(response.body)
 
-    expect(item1.unit_price).to eq("225.00")
+    expect(item["unit_price"]).to eq("225.00")
   end
 
   it "can get one item by its id" do
