@@ -1,5 +1,5 @@
 describe ".customers_with_pending_invoices" do
-  it "returns customers with failed transactions" do
+  xit "returns customers with failed transactions" do
     merch_1 = Merchant.create(name: "Merchant 1")
     customer_1 = Customer.create(first_name: "Joe", last_name: "Schmo")
     customer_2 = Customer.create(first_name: "Jon", last_name: "Schlomo")
