@@ -6,8 +6,9 @@ Rails.application.routes.draw do
         get 'find', to: "find_merchants#show"
         get 'find_all', to: "find_merchants#index"
         get 'random', to: "random_merchants#show"
-        get 'most_revenue', to: "most_revenue_merchants#index"
+        get 'most_revenue', to: "most_revenue#index"
         get '/:id/favorite_customer', to: "favorite_customer#show"
+        get '/:id/customers_with_pending_invoices', to: "customers_with_pending_invoices#show"
       end
       resources :merchants, only: [:show, :index]
 
