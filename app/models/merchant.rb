@@ -18,4 +18,14 @@ class Merchant < ApplicationRecord
     .group(:id).order('count(transactions) DESC').first
   end
 
+# BOSS MODE
+  # def customers_with_pending_invoices
+  #   # byebug
+  #   .find_by_sql("SELECT customers.* FROM customers
+  #   JOIN invoices ON customer.id")
+  #   customers.joins(:transactions)
+  #   .where(transactions: {result: "failed"})
+  #   .group(:id)
+  #   # byebug
+  # end
 end
