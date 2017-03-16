@@ -14,7 +14,7 @@ describe "Invoice API" do
     get "/api/v1/invoices/#{invoice_1.id}/invoice_items"
 
     expect(response).to be_success
-    transactions = JSON.parse(response.body)
-    expect(transactions.count).to eq(2)
+    invoice_items = JSON.parse(response.body)
+    expect(invoice_items.count).to eq(2)
   end
 end
