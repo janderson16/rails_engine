@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Invoice API" do
-  it "sends a list of invoices" do
+  it "sends a list of transactions for a given invoice" do
     merch_1 = Merchant.create(name: "Merchant 1")
     customer_1 = Customer.create(first_name: "Joe", last_name: "Schmo")
     invoice_1 = Invoice.create(customer_id: customer_1.id, merchant_id: merch_1.id)
