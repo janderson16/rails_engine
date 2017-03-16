@@ -5,10 +5,10 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
 
 
-  # def self.most_revenue(count)
-  #   joins(:transactions, :invoice_items)
-  #   .where(transactions: {result: "success"})
-  #   .group(:id).order("sum(quantity * unit_price) DESC")
-  #   .limit(count)
-  # end
+  def self.most_revenue(count)
+    joins(invoices: [:transactions])
+    .where(transactions: {result: "success"})
+    .group(:id).order("sum(invoice_items.quantity * invoice_items.unit_price) DESC")
+    .limit(count)
+  end
 end
