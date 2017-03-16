@@ -18,3 +18,6 @@
 
 # Ignore CSV files.
 db/csv/*.csv
+
+# Ignore Simplecov results
+coverage
