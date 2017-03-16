@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 describe "Items API " do
@@ -73,7 +72,7 @@ describe "Items API " do
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    
+
     expect(item["unit_price"]).to eq("751.07")
   end
 
