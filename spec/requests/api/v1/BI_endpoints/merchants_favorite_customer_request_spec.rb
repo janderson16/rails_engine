@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe ".favorite_customer" do
   it "returns customer with most transactions" do
     merch_1 = Merchant.create!(name: "Merchant 1")

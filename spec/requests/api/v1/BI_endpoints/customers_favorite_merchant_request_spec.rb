@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe ".favorite_customer" do
   it "returns customer with most transactions" do
     customer_1 = Customer.create!(first_name: "Joe", last_name: "Schmo")

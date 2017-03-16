@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe ".customers_with_pending_invoices" do
   xit "returns customers with failed transactions" do
     merch_1 = Merchant.create(name: "Merchant 1")
@@ -16,7 +18,6 @@ describe ".customers_with_pending_invoices" do
 
     expect(response).to be_success
     customer = JSON.parse(response.body)
-    # byebug
     expect(customer["first_name"]).to eq("Jon")
   end
 end
