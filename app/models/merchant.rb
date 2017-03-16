@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.most_revenue(count)
-    joins(:transactions, :invoice_items)
+    joins(invoices: [:transactions, :invoice_items])
     .where(transactions: {result: "success"})
     .group(:id).order("sum(quantity * unit_price) DESC")
     .limit(count)
