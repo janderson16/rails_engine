@@ -21,8 +21,7 @@ describe ".most_revenue" do
     get '/api/v1/items/most_revenue?quantity=3'
 
     expect(response).to be_success
-    merchants = JSON.parse(response.body)
-
+    items = JSON.parse(response.body)
     expect(items.first['name']).to eq("thing3")
   end
 end
