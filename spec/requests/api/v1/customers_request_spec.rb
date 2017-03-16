@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "customers API " do
+describe "Customers API " do
   it "sends a list of customers" do
     create_list(:customer, 3)
 
@@ -47,23 +47,62 @@ describe "customers API " do
   end
 
   it "can find a customer by created date" do
-    created = create(:customer).formatted_create
-    get "/api/v1/customers/find?created_at=#{created}"
+    created = create(:customer, created_at: "2012-03-17T03:04:05.000Z")
+    get "/api/v1/customers/find?created_at=#{created.created_at}"
 
     customer = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(customer["created_at"]).to eq(created)
+    expect(customer["first_name"]).to eq(created.first_name)
   end
 
   it "can find a customer by updated date" do
-    updated = create(:customer).formatted_update
-    get "/api/v1/customers/find?updated_at=#{updated}"
+    updated = create(:customer, updated_at: "2012-03-17T03:04:05.000Z")
+    get "/api/v1/customers/find?updated_at=#{updated.updated_at}"
 
     customer = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(customer["updated_at"]).to eq(updated)
+    expect(customer["first_name"]).to eq(updated.first_name)
   end
 
+  it "can find all customers by first name" do
+    customer_1 = Customer.create(first_name: "John")
+    customer_2 = Customer.create(first_name: "John")
+    customer_3 = Customer.create(first_name: "NotJohn")
+
+    get "/api/v1/customers/find_all?name=#{customer_1.first_name}"
+
+    customers = JSON.parse(response.body)
+
+
+    expect(response).to be_success
+    expect(customers[1]["first_name"]).to eq("John")
+  end
+
+  it "can find all customers by updated date" do
+    customer_1 = Customer.create(created_at: "2012-03-17T03:04:05.000Z")
+    customer_2 = Customer.create(created_at: "2012-03-17T03:04:05.000Z")
+    customer_3 = Customer.create(created_at: "2012-03-17T03:04:06.000Z")
+
+    get "/api/v1/customers/find_all?created_at=#{customer_1.created_at}"
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(customers[1]["first_name"]).to eq(customer_1.first_name)
+  end
+
+  it "can find all customers by updated date" do
+    customer_1 = Customer.create(updated_at: "2012-03-17T03:04:05.000Z")
+    customer_2 = Customer.create(updated_at: "2012-03-17T03:04:05.000Z")
+    customer_3 = Customer.create(updated_at: "2012-03-17T03:04:06.000Z")
+
+    get "/api/v1/customers/find_all?updated_at=#{customer_2.updated_at}"
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(customers[1]["first_name"]).to eq(customer_1.first_name)
+  end
 end

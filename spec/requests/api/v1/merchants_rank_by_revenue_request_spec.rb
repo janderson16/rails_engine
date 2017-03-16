@@ -1,10 +1,3 @@
-require 'rails_helper'
-
-RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
-
 describe ".most_revenue" do
   it "ranks merchants by revenue greatest to least" do
     merchants = Merchant.all
@@ -22,7 +15,12 @@ describe ".most_revenue" do
     transaction_1 = Transaction.create!(invoice_id: invoice_1.id, result: "success")
     transaction_2 = Transaction.create!(invoice_id: invoice_2.id, result: "success")
 
-    expect(merchants.most_revenue(2)).to start_with merch_1
 
+    get '/api/v1/merchants/most_revenue?quantity=2'
+
+    expect(response).to be_success
+    merchants = JSON.parse(response.body)
+
+    expect(merchants.first['name']).to eq("Merchant 1")
   end
 end

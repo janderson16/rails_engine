@@ -1,8 +1,10 @@
+
 require 'rails_helper'
 
 describe "Items API " do
   it "loads a list of items" do
-    create_list(:item, 3)
+    merchant = Merchant.create(name: "TestMerchant")
+    create_list(:item, 3, merchant_id: merchant.id)
 
     get '/api/v1/items'
 
@@ -13,7 +15,8 @@ describe "Items API " do
   end
 
   it "loads an individual item" do
-    Item.create!(id: 1492, name: "item1", description: "Good item", unit_price: 225000)
+    merchant = Merchant.create(name: "TestMerchant")
+    Item.create!(id: 1492, name: "item1", description: "Good item", unit_price: 22595, merchant_id: merchant.id)
 
     get "/api/v1/items/#{1492}"
 
@@ -21,11 +24,12 @@ describe "Items API " do
 
     item = JSON.parse(response.body)
 
-    expect(item["unit_price"]).to eq("225.00")
+    expect(item["unit_price"]).to eq("225.95")
   end
 
   it "can get one item by its id" do
-    id = create(:item).id
+    merchant = Merchant.create(name: "TestMerchant")
+    id = create(:item, merchant_id: merchant.id).id
 
     get "/api/v1/items/#{id}"
 
@@ -36,7 +40,8 @@ describe "Items API " do
   end
 
   it "can get all items by id" do
-    item = Item.create!(id:1492)
+    merchant = Merchant.create(name: "TestMerchant")
+    item = Item.create!(id:1492, merchant_id: merchant.id)
     id = item.id
     get "/api/v1/items/find_all?id=#{id}"
 
@@ -48,7 +53,8 @@ describe "Items API " do
   end
 
   it "can find an item by name" do
-    name = create(:item).name
+    merchant = Merchant.create(name: "TestMerchant")
+    name = create(:item, merchant_id: merchant.id).name
 
     get "/api/v1/items/find?name=#{name}"
 
@@ -58,24 +64,39 @@ describe "Items API " do
     expect(item["name"]).to eq(name)
   end
 
+    it "can find an item by unit price" do
+    merchant = Merchant.create(name: "TestMerchant")
+    price = create(:item, unit_price: 75107, merchant_id: merchant.id).unit_price
+
+    get "/api/v1/items/find?unit_price=#{price}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    
+    expect(item["unit_price"]).to eq("751.07")
+  end
+
   it "can find an item by created date" do
-    created = create(:item, created_at: "2012-03-17T03:04:05.000Z")
+    merchant = Merchant.create(name: "TestMerchant")
+    created = create(:item, merchant_id: merchant.id, created_at: "2013-03-17T03:04:05.000Z")
     get "/api/v1/items/find?created_at=#{created.created_at}"
 
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(item["created_at"]).to eq("2012-03-17T03:04:05.000Z")
+    expect(item["name"]).to eq(created.name)
   end
 
   it "can find an item by updated date" do
-    updated = create(:item, updated_at: "2013-03-17T03:04:05.000Z")
+    merchant = Merchant.create(name: "TestMerchant")
+    updated = create(:item, merchant_id: merchant.id, updated_at: "2013-03-17T03:04:05.000Z")
     get "/api/v1/items/find?updated_at=#{updated.updated_at}"
 
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(item["updated_at"]).to eq("2013-03-17T03:04:05.000Z")
+    expect(item["name"]).to eq(updated.name)
   end
 
 end
