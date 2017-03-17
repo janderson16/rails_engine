@@ -13,7 +13,7 @@ describe ".revenue" do
     invoice_item_2 = InvoiceItem.create!(invoice_id: invoice_2.id, quantity: 1, item_id: item_2.id, unit_price: item_2.unit_price)
     transaction_1 = Transaction.create!(invoice_id: invoice_1.id, result: "success")
     transaction_2 = Transaction.create!(invoice_id: invoice_2.id, result: "success")
-    total_revenue = merch_1.total_revenue(date)
+    # total_revenue = merch_1.total_revenue(date)
 
     get "/api/v1/merchants/#{merch_1.id}/revenue?date=#{date}"
 

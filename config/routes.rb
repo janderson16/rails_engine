@@ -10,8 +10,10 @@ Rails.application.routes.draw do
         get '/:id/invoices', to: "invoices#index"
         get '/:id/revenue', to: "revenue#show"
         get '/most_revenue', to: "most_revenue#index"
+        get '/:id/revenue', to: "most_revenue#show"
         get '/most_items', to: "most_items#index"
         get '/:id/favorite_customer', to: "favorite_customer#show"
+
         # get '/:id/customers_with_pending_invoices', to: "customers_with_pending_invoices#show"
       end
       resources :merchants, only: [:show, :index]
@@ -21,8 +23,10 @@ Rails.application.routes.draw do
         get '/find_all', to: "find_items#index"
         get '/random', to: "random_items#show"
         get '/most_revenue', to: "most_revenue#index"
+        get '/most_items', to: "most_items#index"
         get '/:id/merchant', to: "item_merchants#index"
         get '/:id/invoice_items', to: "invoice_items#index"
+        get '/:id/best_day', to: "best_day#index"
       end
       resources :items, only: [:show, :index]
 

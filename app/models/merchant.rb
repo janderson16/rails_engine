@@ -27,10 +27,10 @@ class Merchant < ApplicationRecord
   end
 
   def total_revenue(date)
-    invoices.where("invoices.created_at = ?", date)
-   invoices.joins(:transactions, :invoice_items)
-    .where(transactions: {result: "success"})
-    .sum("invoice_items.quantity * invoice_items.unit_price")
+    joins(invoices: [:invoice_items, :transactions])
+    .merge(Transaction.success)
+    .where(invoices: {created_at: (date)})
+    .sum("quantity * unit_price")
   end
 
   def favorite_customer
