@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "invoice tems API" do
+describe "invoice items API" do
   it "sends a list of invoice items" do
     merchant = Merchant.create(name: "TestMerchant")
     item_1 = Item.create(name: "Test Item", merchant_id: merchant.id)
