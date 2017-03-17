@@ -23,6 +23,14 @@ class Merchant < ApplicationRecord
     .limit(count)
   end
 
+  # def self.revenue_by_date(date)
+  #   joins(invoices: [:transactions, :invoice_items])
+  #   .where(transactions: {result: "success"})
+  #   .where(created_at: (date))
+  #   .group(:id)
+  #   .order("sum(quantity * unit_price) DESC")
+  # end
+
   def favorite_customer
     customers.joins(:transactions)
     .merge(Transaction.success)
