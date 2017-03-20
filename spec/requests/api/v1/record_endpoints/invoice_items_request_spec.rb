@@ -31,7 +31,10 @@ describe "invoice items API" do
     invoice_item = JSON.parse(response.body)
     expect(response).to be_success
     expect(invoice_item["item_id"]).to eq(item_1.id)
-
+    expect(invoice_item).to have_key "invoice_id"
+    expect(invoice_item).to have_key "item_id"
+    expect(invoice_item).to have_key "quantity"
+    expect(invoice_item).to have_key "unit_price"
   end
 
   it 'can find all invoice items by id' do
