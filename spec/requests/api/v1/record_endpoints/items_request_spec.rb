@@ -98,4 +98,13 @@ describe "Items API " do
     expect(item["name"]).to eq(updated.name)
   end
 
+  it "can find a random item" do
+    create(:item)
+    create(:item)
+
+    get "/api/v1/items/random"
+
+    expect(response).to be_success
+  end
+
 end
