@@ -8,8 +8,6 @@ Rails version - 5.0.2
 PostgreSQL
 
 In order to run:
--Clone repository
--Run 'bundle exec' from command line
--Run 'rake db:create'
--Run 'rake db:migrate'
--Run 'rake db:seed'
+⋅⋅* Clone repository
+⋅⋅* Move to root folder of project in command line
+⋅⋅* Run 'rake install:all' from command line
